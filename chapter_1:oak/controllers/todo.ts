@@ -77,9 +77,9 @@ export default {
    */
   updateTodoById: async (
     { params, request, response }: {
-      params: { id: string };
-      request: any;
-      response: any;
+      params: { id: string },
+      request: any,
+      response: any,
     },
   ) => {
     const todo: Todo | undefined = todos.find((t) => t.id === params.id);
