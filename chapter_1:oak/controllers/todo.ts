@@ -30,7 +30,7 @@ export default {
         success: false,
         message: "No data provided",
       };
-      return response;
+      return;
     }
 
     // if everything is fine then perform
@@ -61,7 +61,7 @@ export default {
         success: false,
         message: "No todo found",
       };
-      return response;
+      return;
     }
 
     // If todo is found
@@ -89,7 +89,7 @@ export default {
         success: false,
         message: "No todo found",
       };
-      return response;
+      return;
     }
 
     // if todo found then update todo
