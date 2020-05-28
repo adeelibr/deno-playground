@@ -4,9 +4,9 @@ import { green, yellow } from "https://deno.land/std@0.53.0/fmt/colors.ts";
 // routes
 import todoRouter from "./routes/todo.ts";
 // logger
-import logger from './helper/logger.ts';
+import logger from './middlewares/logger.ts';
 // not found
-import notFound from './helper/notFound.ts';
+import notFound from './middlewares/notFound.ts';
 
 const app = new Application();
 const port: number = 8080;
