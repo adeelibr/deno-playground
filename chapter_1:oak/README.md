@@ -2,6 +2,13 @@
 
 Using oak to create a todo application.
 
+List of thing achieved;
+
+- Create a server using OAK
+- Create routes and there controller
+- Make an interface
+- Stub some data
+
 ## Run
 
 ```
