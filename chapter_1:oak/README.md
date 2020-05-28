@@ -8,6 +8,8 @@ List of thing achieved;
 - Create routes and there controller
 - Make an interface
 - Stub some data
+- Add logger middleware
+- Add a not found middleware
 
 ## Run
 
