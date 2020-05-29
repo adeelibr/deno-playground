@@ -94,7 +94,7 @@ export default {
 
     // if todo found then update todo
     const body = await request.body();
-    const updatedData: { todo?: string; isCompleted?: string } = body.value;
+    const updatedData: { todo?: string; isCompleted?: boolean } = body.value;
     let newTodos = todos.map((t) => {
       return t.id === params.id ? { ...t, ...updatedData } : t;
     });
