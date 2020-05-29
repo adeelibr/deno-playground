@@ -1,6 +1,8 @@
 # Description
 
-Using oak to create a todo application.
+Tutorial for this codebase can be found at freecodecamp https://www.freecodecamp.org/news/create-a-todo-api-in-deno-written-by-a-guy-coming-from-node/
+
+This tutorial focused on using oak to create a todo application.
 
 List of thing achieved;
 
