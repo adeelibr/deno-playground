@@ -1,20 +1,28 @@
-import { v4 } from "https://deno.land/std/uuid/mod.ts";
 // interfaces
 import Todo from "../interfaces/Todo.ts";
-// stubs
-import todos from "../stubs/todos.ts";
+// models
+import TodoModel from "../models/todo.ts";
 
 export default {
   /**
    * @description Get all todos
    * @route GET /todos
    */
-  getAllTodos: ({ response }: { response: any }) => {
-    response.status = 200;
-    response.body = {
-      success: true,
-      data: todos,
-    };
+  getAllTodos: async ({ response }: { response: any }) => {
+    try {
+      const data = await TodoModel.getAll();
+      response.status = 200;
+      response.body = {
+        success: true,
+        data,
+      };
+    } catch (error) {
+      response.status = 400;
+      response.body = {
+        success: false,
+        message: `Error: ${error}`,
+      };
+    }
   },
   /**
    * @description Add a new todo
@@ -33,43 +41,56 @@ export default {
       return;
     }
 
-    // if everything is fine then perform
-    // operation and return todos with the
-    // new data added.
-    let newTodo: Todo = {
-      id: v4.generate(),
-      todo: body.value.todo,
-      isCompleted: false,
-    };
-    let data = [...todos, newTodo];
-    response.body = {
-      success: true,
-      data,
-    };
+    try {
+      await TodoModel.add(
+        { todo: body.value.todo, isCompleted: false },
+      );
+      response.body = {
+        success: true,
+        message: "The record was added successfully",
+      };
+    } catch (error) {
+      response.status = 400;
+      response.body = {
+        success: false,
+        message: `Error: ${error}`,
+      };
+    }
   },
   /**
    * @description Get todo by id
    * @route GET todos/:id
    */
-  getTodoById: (
+  getTodoById: async (
     { params, response }: { params: { id: string }; response: any },
   ) => {
-    const todo: Todo | undefined = todos.find((t) => t.id === params.id);
-    if (!todo) {
-      response.status = 404;
+    try {
+      const isAvailable = await TodoModel.doesExistById(
+        { id: Number(params.id) },
+      );
+
+      if (!isAvailable) {
+        response.status = 404;
+        response.body = {
+          success: false,
+          message: "No todo found",
+        };
+        return;
+      }
+
+      const todo: Todo = await TodoModel.getById({ id: Number(params.id) });
+      response.status = 200;
+      response.body = {
+        success: true,
+        data: todo,
+      };
+    } catch (error) {
+      response.status = 400;
       response.body = {
         success: false,
-        message: "No todo found",
+        message: `Error: ${error}`,
       };
-      return;
     }
-
-    // If todo is found
-    response.status = 200;
-    response.body = {
-      success: true,
-      data: todo,
-    };
   },
   /**
    * @description Update todo by id
@@ -77,48 +98,63 @@ export default {
    */
   updateTodoById: async (
     { params, request, response }: {
-      params: { id: string },
-      request: any,
-      response: any,
+      params: { id: string };
+      request: any;
+      response: any;
     },
   ) => {
-    const todo: Todo | undefined = todos.find((t) => t.id === params.id);
-    if (!todo) {
-      response.status = 404;
+    try {
+      const isAvailable = await TodoModel.doesExistById(
+        { id: Number(params.id) },
+      );
+      if (!isAvailable) {
+        response.status = 404;
+        response.body = {
+          success: false,
+          message: "No todo found",
+        };
+        return;
+      }
+
+      // if todo found then update todo
+      const body = await request.body();
+      const updatedRows = TodoModel.updateById({
+        id: Number(params.id),
+        ...body.value,
+      });
+      response.status = 200;
+      response.body = {
+        success: true,
+        message: `Successfully updated ${updatedRows} row(s)`,
+      };
+    } catch (error) {
+      response.status = 400;
       response.body = {
         success: false,
-        message: "No todo found",
+        message: `Error: ${error}`,
       };
-      return;
     }
-
-    // if todo found then update todo
-    const body = await request.body();
-    const updatedData: { todo?: string; isCompleted?: boolean } = body.value;
-    let newTodos = todos.map((t) => {
-      return t.id === params.id ? { ...t, ...updatedData } : t;
-    });
-    response.status = 200;
-    response.body = {
-      success: true,
-      data: newTodos,
-    };
   },
   /**
    * @description Delete todo by id
    * @route DELETE todos/:id
    */
-  deleteTodoById: (
+  deleteTodoById: async (
     { params, response }: { params: { id: string }; response: any },
   ) => {
-    const allTodos = todos.filter((t) => t.id !== params.id);
-
-    // remove the todo w.r.t id & return
-    // remaining todos
-    response.status = 200;
-    response.body = {
-      success: true,
-      data: allTodos,
-    };
+    try {
+      const updatedRows = await TodoModel.deleteById({ id: Number(params.id) });
+      response.status = 200;
+      response.body = {
+        success: true,
+        message: `Successfully updated ${updatedRows} row(s)`,
+      };
+    } catch (error) {
+      response.status = 400;
+      response.body = {
+        success: false,
+        message: `Error: ${error}`,
+      };
+    }
   },
 };

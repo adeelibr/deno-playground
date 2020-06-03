@@ -1,21 +1,20 @@
 # Description
 
-Tutorial for this codebase can be found at freecodecamp https://www.freecodecamp.org/news/create-a-todo-api-in-deno-written-by-a-guy-coming-from-node/
+Tutorial for this codebase can be found at freecodecamp ????
 
-This tutorial focused on using oak to create a todo application.
+This tutorial builds on top of chapter 1
 
 List of thing achieved;
 
-- Create a server using OAK
-- Create routes and there controller
-- Make an interface
-- Stub some data
-- Add logger middleware
-- Add a not found middleware
+- Create a DB connection
+- Write a script that initialized DB & creates a table
+- Write CRUD operations for DB & them in rest API's
 
-## Run
+## Steps [Execution order]
 
-```
+### Run
+
+```bash
 deno run --allow-net server.ts
 ```
 
@@ -28,3 +27,18 @@ POST     /todos
 PUT      /todos/:id
 DELETE   /todos/:id
 ```
+
+## Database Tricks
+
+Once you have `mysql community server` & `mysql workbench` installed.
+
+- Start MySql server
+- Open workbench
+- Run the following command
+
+```sql
+select current_user();
+set password = "";
+```
+
+> This is because current mySql-deno pacakge doesn't work with latest mySql
