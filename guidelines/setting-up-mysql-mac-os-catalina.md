@@ -7,9 +7,7 @@ I am on a Mac OS system using version Catalina. To have MySQL running on my mach
 
 If you are on a windows machine you can use the same tools or you can use [XAMPP](https://www.apachefriends.org/index.html) as well.
 
-### Let's begin
-
-##### Installing MySQL
+### Installing MySQL
 
 First we have to install [MySQL community server](https://dev.mysql.com/downloads/mysql/). Install this and follow along the instructions. It will at the end stages of installion ask you to set a password for your username.
 
@@ -27,7 +25,7 @@ Click on `Start MySQL Server` button
 
 ![MySQL after starting](assets/3-mysql-after-start.png?raw=true "mysql")
 
-##### Installing MySQL Workbench
+### Installing MySQL Workbench
 
 Next we have to install [MySQL workbench](https://dev.mysql.com/downloads/workbench/). Follow the steps along. Once it is installed. Open `workbench`. It should look like below. (Make sure before opening this that you have your MySQL instance running)
 
@@ -37,7 +35,9 @@ Once open an instance of `localhost` It will open up a dialog like this
 
 ![MySQL workbench query panel](assets/5-workbench-query-panel.png?raw=true "workbench query panel")
 
-Inside the `query panel box` write the following query
+##### Set your MySQL password to empty
+
+Inside the `query panel box` write the following query.
 
 ```sql
 select current_user();
