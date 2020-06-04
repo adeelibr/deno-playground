@@ -11,7 +11,7 @@ client.connect({
   db: "",
 });
 
-const run = async () => {``
+const run = async () => {
   // create database (if not created before)
   await client.execute(`CREATE DATABASE IF NOT EXISTS ${DATABASE}`);
   // select db
