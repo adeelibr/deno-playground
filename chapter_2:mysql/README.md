@@ -30,7 +30,7 @@ DELETE   /todos/:id
 
 ### Installing MySQL community server & MySQL workbench
 
-Guideline written [here](guidelines/setting-up-mysql-mac-os-catalina.md)
+Guideline written [here](../guidelines/setting-up-mysql-mac-os-catalina.md)
 
 ## Database Tricks
 
