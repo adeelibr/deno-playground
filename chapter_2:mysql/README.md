@@ -1,6 +1,6 @@
 # Description
 
-Tutorial for this codebase can be found at freecodecamp ????
+Tutorial for this codebase can be found at https://www.freecodecamp.org/news/p/de7a850a-6d40-48a0-b6d7-8bf00ce66d10/
 
 This tutorial builds on top of chapter 1
 
@@ -27,6 +27,10 @@ POST     /todos
 PUT      /todos/:id
 DELETE   /todos/:id
 ```
+
+### Installing MySQL community server & MySQL workbench
+
+Guideline written [here](guidelines/setting-up-mysql-mac-os-catalina.md)
 
 ## Database Tricks
 
