@@ -143,8 +143,8 @@ export default {
     { params, response }: { params: { id: string }; response: any },
   ) => {
     try {
-      const updatedRows = await TodoModel.deleteById({ 
-        id: Number(params.id) 
+      const updatedRows = await TodoModel.deleteById({
+        id: Number(params.id),
       });
       response.status = 200;
       response.body = {
