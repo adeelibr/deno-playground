@@ -118,7 +118,7 @@ export default {
 
       // if todo found then update todo
       const body = await request.body();
-      const updatedRows = TodoModel.updateById({
+      const updatedRows = await TodoModel.updateById({
         id: Number(params.id),
         ...body.value,
       });
