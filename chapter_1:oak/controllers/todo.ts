@@ -23,7 +23,8 @@ export default {
   createTodo: async (
     { request, response }: { request: any; response: any },
   ) => {
-    const body = await request.body();
+    const { value : todoBody } = await request.body();
+    const todo: Todo = todoBody;
     if (!request.hasBody) {
       response.status = 400;
       response.body = {
@@ -38,7 +39,7 @@ export default {
     // new data added.
     let newTodo: Todo = {
       id: v4.generate(),
-      todo: body.value.todo,
+      todo: (await todo).todo,
       isCompleted: false,
     };
     let data = [...todos, newTodo];
